@@ -1,11 +1,7 @@
 name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+description: 'Update NPM version and create a release'
+author: 'uiu_ytb_'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
 runs:
   using: 'node16'
   main: 'dist/index.js'
