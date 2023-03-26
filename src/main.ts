@@ -14,12 +14,14 @@ async function run(): Promise<void> {
         // core.info(JSON.stringify(GitHub.rest.git.getCommit()))
 
         core.debug(pkg.version)
-        GitHub.rest.repos.createRelease({
+        const d = await GitHub.rest.repos.createRelease({
             repo,
             tag_name: pkg.version,
             owner,
             generate_release_notes: true
         })
+        core.info(`${d.status}`)
+        core.info(d.data.url)
         if (core.isDebug()) {
             core.debug(JSON.stringify(github.context))
         }
