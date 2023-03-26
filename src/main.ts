@@ -18,8 +18,7 @@ async function run(): Promise<void> {
             repo,
             tag_name: pkg.version,
             owner,
-            generate_release_notes: true,
-            draft: true
+            generate_release_notes: true
         })
         if (core.isDebug()) {
             core.debug(JSON.stringify(github.context))
