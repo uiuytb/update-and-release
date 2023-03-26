@@ -45,9 +45,22 @@ const fs_1 = __nccwpck_require__(7147);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            const token = core.getInput('token');
             const pkg = JSON.parse((0, fs_1.readFileSync)('package.json', { encoding: 'utf8' }));
+            const { repo, owner } = github.context.repo;
+            const GitHub = github.getOctokit(token);
             core.debug(pkg.version);
-            core.info(JSON.stringify(github.context));
+            const d = yield GitHub.rest.repos.createRelease({
+                repo,
+                tag_name: pkg.version,
+                owner,
+                generate_release_notes: true
+            });
+            core.info(`${d.status}`);
+            core.info(d.data.url);
+            if (core.isDebug()) {
+                core.debug(JSON.stringify(github.context));
+            }
         }
         catch (error) {
             if (error instanceof Error)

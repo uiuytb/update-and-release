@@ -11,8 +11,6 @@ async function run(): Promise<void> {
         const {repo, owner} = github.context.repo
         const GitHub = github.getOctokit(token)
 
-        // core.info(JSON.stringify(GitHub.rest.git.getCommit()))
-
         core.debug(pkg.version)
         const d = await GitHub.rest.repos.createRelease({
             repo,
