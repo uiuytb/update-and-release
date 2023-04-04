@@ -1,11 +1,6 @@
-name: 'Your name here'
-description: 'Update NPM version and create a release'
+name: 'uiu_ytb_'
+description: 'give npm version'
 author: 'uiu_ytb_'
 runs:
   using: 'node16'
   main: 'dist/index.js'
-inputs:
-  token:
-    description: 'The Github token.'
-    required: false
-    default: ${{ github.token }}
