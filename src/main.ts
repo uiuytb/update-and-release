@@ -1,19 +1,16 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {readFileSync} from 'fs'
 
 async function run(): Promise<void> {
-  try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    try {
+        const pkg = JSON.parse(
+            readFileSync('package.json', {encoding: 'utf8'})
+        ) as {version: string}
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
-  } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
-  }
+        core.setOutput('version', pkg.version)
+    } catch (error) {
+        if (error instanceof Error) core.setFailed(error.message)
+    }
 }
 
 run()
